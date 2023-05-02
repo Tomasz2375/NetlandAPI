@@ -1,6 +1,10 @@
+using NetlandAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IAppsettingsDevelopment, AppsettingsDevelopment>();
+builder.Services.AddScoped<ICsvService, CsvService>();
 
 var app = builder.Build();
 

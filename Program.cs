@@ -16,7 +16,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSwagger();
@@ -24,13 +23,10 @@ app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "NetlandAPI");
 });
-
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 app.MapRazorPages();
-
 app.Run();

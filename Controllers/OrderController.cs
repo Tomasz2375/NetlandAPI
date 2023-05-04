@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NetlandAPI.Entity;
+using NetlandAPI.Models;
 using NetlandAPI.Services;
 
 namespace NetlandAPI.Controllers
@@ -16,9 +17,9 @@ namespace NetlandAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> GetOrder()
+        public ActionResult<IEnumerable<Order>> GetOrder([FromQuery] SearchPhrasesDto dto)
         {
-            var orders = _orderService.GetOrder();
+            var orders = _orderService.GetOrder(dto);
             return Ok(orders);
 
         }

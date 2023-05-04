@@ -11,13 +11,15 @@ namespace NetlandAPI.Controllers
     {
         private readonly IOrderService _orderService;
 
-        public OrderController(ICsvService csvService, IOrderService orderService)
+        public OrderController(ICsvService csvService, 
+            IOrderService orderService)
         {
             _orderService = orderService;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> GetOrder([FromQuery] SearchPhrasesDto dto)
+        public ActionResult<IEnumerable<Order>> GetOrder
+            ([FromQuery] SearchPhrasesDto dto)
         {
             var orders = _orderService.GetOrder(dto);
             return Ok(orders);

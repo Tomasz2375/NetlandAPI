@@ -4,7 +4,9 @@
     {
         public string GetOrderFilePath()
         {
-            return WebApplication.CreateBuilder().Configuration.GetConnectionString("OrderFilePath");
+            return WebApplication.CreateBuilder()
+                .Configuration
+                .GetConnectionString("OrderFilePath");
         }
     }
 }

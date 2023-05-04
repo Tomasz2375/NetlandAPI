@@ -8,7 +8,8 @@ namespace NetlandAPI.Services
         private readonly ICsvService _csvService;
         private readonly IAppsettingsDevelopment _appsettingsDevelopment;
 
-        public OrderService(ICsvService csvService, IAppsettingsDevelopment appsettingsDevelopment)
+        public OrderService(ICsvService csvService, 
+            IAppsettingsDevelopment appsettingsDevelopment)
         {
             _csvService = csvService;
             _appsettingsDevelopment = appsettingsDevelopment;
@@ -16,7 +17,9 @@ namespace NetlandAPI.Services
 
         public IEnumerable<Order> GetOrder(SearchPhrasesDto dto)
         {
-            var orders = _csvService.ReadOrderCSV(_appsettingsDevelopment.GetOrderFilePath());
+            var orders = _csvService
+                .ReadOrderCSV(_appsettingsDevelopment.GetOrderFilePath());
+
             if (!string.IsNullOrEmpty(dto.Number))
             {
                 orders = SearchForClientNumber(orders, dto);
@@ -36,32 +39,34 @@ namespace NetlandAPI.Services
             return orders;
         }
 
-        private IEnumerable<Order> SearchForClientNumber(IEnumerable<Order> orders, SearchPhrasesDto dto)
+        private IEnumerable<Order> SearchForClientNumber
+            (IEnumerable<Order> orders, SearchPhrasesDto dto)
         {
             return orders.Where(o => o.Number == dto.Number);
         }
-        private IEnumerable<Order> SearchForClientCode(IEnumerable<Order> orders, SearchPhrasesDto dto)
+        private IEnumerable<Order> SearchForClientCode
+            (IEnumerable<Order> orders, SearchPhrasesDto dto)
         {
             List<Order> results = new List<Order>();
             foreach (var clientCode in dto.ClientCode)
             {
                 if (orders.Where(o => o.ClientCode == clientCode) != null)
                 {
-                    results.AddRange(orders.Where(o => o.ClientCode == clientCode));
+                    results.AddRange(orders
+                        .Where(o => o.ClientCode == clientCode));
                 }
             }
-            orders = results.Distinct();
-            return orders;
+            return results.Distinct();
         }
-        private IEnumerable<Order> SearchForOrderPlacedAfterDate(IEnumerable<Order> orders, SearchPhrasesDto dto)
+        private IEnumerable<Order> SearchForOrderPlacedAfterDate
+            (IEnumerable<Order> orders, SearchPhrasesDto dto)
         {
-            orders = orders.Where(o => o.OrderDate >= dto.DateFrom);
-            return orders;
+            return orders.Where(o => o.OrderDate >= dto.DateFrom);
         }
-        private IEnumerable<Order> SearchForOrderPlacedBeforeDate(IEnumerable<Order> orders, SearchPhrasesDto dto)
+        private IEnumerable<Order> SearchForOrderPlacedBeforeDate
+            (IEnumerable<Order> orders, SearchPhrasesDto dto)
         {
-            orders = orders.Where(o => o.OrderDate <= dto.DateTo);
-            return orders;
+            return orders.Where(o => o.OrderDate <= dto.DateTo);
         }
 
     }

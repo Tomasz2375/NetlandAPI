@@ -11,7 +11,6 @@ namespace NetlandAPI.Services
     {
         public IEnumerable<Order> ReadOrderCSV(string path)
         {
-            var indexes = new[] { 1, 2, 3 };
             var csvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,

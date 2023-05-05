@@ -3,12 +3,12 @@ The goal of the project, was to create an application in ASP.NET 6.0.
 The most important purposes of the application are:
 * reading data from a csv file,
 * mapping data to the Order.cs class,
-* download all data or data that matching the search criteria,
+* downloading all data, or data that matches the searching criteria,
 
-How to run the application?
+Running the application
 1. Download the application, e.g. from the link below or from my github profile
 https://github.com/Tomasz2375/NetlandAPI.git
-2. Create a csv file with the following structure:
+2. Use a csv file with the following structure ("Resources\Order.csv"):
 * header
 Number,ClientCode,ClientName,OrderDate,ShipmentDate,Quantity,Confirmed,Value
 * file content
@@ -26,7 +26,7 @@ Number,ClientCode,ClientName,OrderDate,ShipmentDate,Quantity,Confirmed,Value
 	* Value - takes a decimal value.
 3. Set path to your file in "appsettings.Development.json"
 in variable "OrderFilePath".
-4. This application uses external packages:
+4. Run the application and use the swagger to use the get method.
+5. This application uses external packages:
 	* CsvHelper Version 30.0.1
 	* Swashbuckle.AspNetCore Version 6.5.0
-5. Run the application and use the swagger to use the get method.

@@ -6,7 +6,7 @@ using NetlandAPI.Services;
 namespace NetlandAPI.Controllers
 {
     [ApiController]
-    [Route("api/order")]
+    [Route("api/orders")]
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
@@ -17,7 +17,7 @@ namespace NetlandAPI.Controllers
             _orderService = orderService;
         }
 
-        [HttpGet]
+        [HttpGet("/searchOrders")]
         public ActionResult<IEnumerable<Order>> GetOrder
             ([FromQuery] SearchPhrasesDto dto)
         {

@@ -2,6 +2,6 @@
 {
     public interface IAppsettingsDevelopment
     {
-        public string GetOrderFilePath();
+        string GetOrderFilePath();
     }
 }

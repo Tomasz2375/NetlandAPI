@@ -6,19 +6,18 @@ namespace NetlandAPI.Services
     public class OrderService : IOrderService
     {
         private readonly ICsvService _csvService;
-        private readonly IAppsettingsDevelopment _appsettingsDevelopment;
+        private readonly IConfiguration _configuration;
 
-        public OrderService(ICsvService csvService, 
-            IAppsettingsDevelopment appsettingsDevelopment)
+        public OrderService(ICsvService csvService, IConfiguration configuration)
         {
             _csvService = csvService;
-            _appsettingsDevelopment = appsettingsDevelopment;
+            _configuration = configuration;
         }
 
         public IEnumerable<Order> GetOrder(SearchPhrasesDto dto)
         {
             var orders = _csvService
-                .ReadOrderCSV(_appsettingsDevelopment.GetOrderFilePath());
+                .ReadOrderCSV(_configuration.GetConnectionString("OrderFilePath"));
 
             if (!string.IsNullOrEmpty(dto.Number))
             {
@@ -50,13 +49,9 @@ namespace NetlandAPI.Services
             List<Order> results = new List<Order>();
             foreach (var clientCode in dto.ClientCode)
             {
-                if (orders.Where(o => o.ClientCode == clientCode) != null)
-                {
-                    results.AddRange(orders
-                        .Where(o => o.ClientCode == clientCode));
-                }
+                results.AddRange(orders.Where(o => o.ClientCode == clientCode));
             }
-            return results.Distinct();
+            return orders.Intersect(results);
         }
         private IEnumerable<Order> SearchForOrderPlacedAfterDate
             (IEnumerable<Order> orders, SearchPhrasesDto dto)

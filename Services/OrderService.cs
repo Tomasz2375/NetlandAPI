@@ -6,19 +6,18 @@ namespace NetlandAPI.Services
     public class OrderService : IOrderService
     {
         private readonly ICsvService _csvService;
-        private readonly IAppsettingsDevelopment _appsettingsDevelopment;
+        private readonly IConfiguration _configuration;
 
-        public OrderService(ICsvService csvService, 
-            IAppsettingsDevelopment appsettingsDevelopment)
+        public OrderService(ICsvService csvService, IConfiguration configuration)
         {
             _csvService = csvService;
-            _appsettingsDevelopment = appsettingsDevelopment;
+            _configuration = configuration;
         }
 
         public IEnumerable<Order> GetOrder(SearchPhrasesDto dto)
         {
             var orders = _csvService
-                .ReadOrderCSV(_appsettingsDevelopment.GetOrderFilePath());
+                .ReadOrderCSV(_configuration.GetConnectionString("OrderFilePath"));
 
             if (!string.IsNullOrEmpty(dto.Number))
             {

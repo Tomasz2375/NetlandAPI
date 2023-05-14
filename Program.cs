@@ -4,10 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAppsettingsDevelopment, AppsettingsDevelopment>();
 builder.Services.AddScoped<ICsvService, CsvService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

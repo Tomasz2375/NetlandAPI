@@ -1,11 +1,5 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
+﻿using CsvHelper.Configuration;
 using NetlandAPI.Entity;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace NetlandAPI.EntityMap
 {

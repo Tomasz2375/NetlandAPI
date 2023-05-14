@@ -49,13 +49,9 @@ namespace NetlandAPI.Services
             List<Order> results = new List<Order>();
             foreach (var clientCode in dto.ClientCode)
             {
-                if (orders.Where(o => o.ClientCode == clientCode) != null)
-                {
-                    results.AddRange(orders
-                        .Where(o => o.ClientCode == clientCode));
-                }
+                results.AddRange(orders.Where(o => o.ClientCode == clientCode));
             }
-            return results.Distinct();
+            return orders.Intersect(results);
         }
         private IEnumerable<Order> SearchForOrderPlacedAfterDate
             (IEnumerable<Order> orders, SearchPhrasesDto dto)

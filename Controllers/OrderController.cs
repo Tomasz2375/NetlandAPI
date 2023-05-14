@@ -23,7 +23,6 @@ namespace NetlandAPI.Controllers
         {
             var orders = _orderService.GetOrder(dto);
             return Ok(orders);
-
         }
     }
 }
